@@ -1,38 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Ubuntu&display=swap');
+/* Title: Poppins
+Default Text: Ubuntu */
+
+/* Default Colours*/
+
+/* Orange: #f4813f
+Red: #f1556a
+Yellow Highlight: #fba70b
+*/
+
+/* 
+---------------------------------------------
+reset
+--------------------------------------------- 
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
+pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
+s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+figure, header, nav, section, article, aside, footer, figcaption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+html[xmlns] .clearfix {
+  display: block;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+header, nav, section, article, aside, footer, hgroup {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+  background-color: #fff;
+  font-size: 16px;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+ul {
+  margin-bottom: 0px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 25px;
+  color: #888;
+}
+
 .App {
-  text-align: center;
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App h1 {
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.banner {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 100;
+  height: 100px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.banner .logo {
+  font-family: 'Poppins', sans-serif;
+  margin-left: 30px;
+  line-height: 80px;
+  color: #191a20;
+  font-size: 28px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  float: left;
+}
+
+
+
+.banner h1 {
+  padding: 50px;
+  float: left;
+}
+
+.banner .nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  float: left;
+  margin-top: 27px;
+  margin-left: 15%;
+  margin-right: 0px;
+  background-color: #fff;
+  padding: 0px 20px;
+  position: relative;
+  z-index: 999;
 }
 
-.App-link {
-  color: #61dafb;
+.banner .nav li {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.banner .nav li:last-child {
+  padding-right: 0px;
+}
+
+.banner .nav li a, .banner .sign-up a {
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  color: #7a7a7a;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  height: 40px;
+  line-height: 40px;
+  border: transparent;
+  letter-spacing: 1px;
+}
+
+.banner .nav li a:hover {
+  color: #fba70b;
+}
+
+.banner .sign-up {
+  display: flex;
+  float: right;
+  flex-wrap: wrap;
+  margin-top: 27px;
+  margin-left: 0px;
+  margin-right: 5%;
+  background-color:#fba70b;
+  padding: 0px 20px;
+  position: relative;
+  height: 40px;
+  z-index: 999;
+  border-radius: 25px;
+}
+
+.banner .sign-up a {
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 14 !important;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.welcome-area {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  min-height: 793px;
+  background-image: url('./images/banner-bg.png');
+  background-repeat: no-repeat;
+  background-position: right top;
+}
+
+.welcome-area .text-area {
+  display: block;
+  position: relative;
+  margin: 15% 0px 0px 300px;
+  width: 30%;
+}
+
+.welcome-area .text-area h1 {
+  font-weight: 900;
+  font-size: 52px;
+  line-height: 80px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  color: #191a20;
 }
