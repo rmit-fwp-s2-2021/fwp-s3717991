@@ -14,10 +14,8 @@ Yellow Highlight: #fba70b
 reset
 --------------------------------------------- 
 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
-pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
-s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-figure, header, nav, section, article, aside, footer, figcaption {
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, figure, header, nav, section, article, aside, footer, figcaption {
   margin: 0;
   padding: 0;
   border: 0;
@@ -88,14 +86,46 @@ p {
   color: #888;
 }
 
+/* 
+----------------
+GLOBAL
+----------------
+*/
+
+a.main-button-slider {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 15px 25px;
+  background-color: #fba70b;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+a.main-button-slider:hover {
+  background-color: #f1556a;
+}
+
 .App {
   position: relative;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .App h1 {
   font-family: 'Poppins', sans-serif;
 }
+
+/*
+----------
+Banner
+----------
+*/
 
 .banner {
   position: absolute;
@@ -108,7 +138,7 @@ p {
 
 .banner .logo {
   font-family: 'Poppins', sans-serif;
-  margin-left: 30px;
+  margin-left: 100px;
   line-height: 80px;
   color: #191a20;
   font-size: 28px;
@@ -117,8 +147,6 @@ p {
   letter-spacing: 2px;
   float: left;
 }
-
-
 
 .banner h1 {
   padding: 50px;
@@ -147,7 +175,7 @@ p {
   padding-right: 0px;
 }
 
-.banner .nav li a, .banner .sign-up a {
+.banner .nav li a {
   font-family: 'Poppins', sans-serif;
   display: block;
   font-weight: 500;
@@ -175,12 +203,6 @@ p {
   margin-top: 27px;
   margin-left: 0px;
   margin-right: 5%;
-  background-color:#fba70b;
-  padding: 0px 20px;
-  position: relative;
-  height: 40px;
-  z-index: 999;
-  border-radius: 25px;
 }
 
 .banner .sign-up a {
@@ -202,10 +224,11 @@ p {
 }
 
 .welcome-area .text-area {
-  display: block;
+  width: 70%;
+  margin-left: 15%;
   position: relative;
-  margin: 15% 0px 0px 300px;
-  width: 30%;
+  align-self: center;
+  margin-top: 40%;
 }
 
 .welcome-area .text-area h1 {
@@ -215,4 +238,174 @@ p {
   letter-spacing: 1px;
   margin-bottom: 30px;
   color: #191a20;
+}
+
+.welcome-area .text-area h1 span {
+  color: #fba70b;
+}
+
+.welcome-area .text-area p {
+  font-weight: 300;
+  font-size: 17px;
+  color: #7a7a7a;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+/*
+----------
+Footer
+----------
+*/
+
+footer {
+  margin-top: 200px;
+  padding-top: 120px;
+  background-image: url('./images/footer-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  min-height: 767px;
+  color: #fff;
+}
+
+footer .footer-content {
+  padding: 120px 0px;
+  color: #fff;
+}
+
+.footer-content .right-content h2 {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  font-size: 42px;
+  text-transform: capitalize;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.footer-content .right-content span {
+  color: #fba70b;
+}
+
+.footer-content .right-content p, .sub-footer p {
+  color: #fff;
+}
+
+footer .copyright {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  color: #4a4a4a;
+  letter-spacing: 0.88px;
+  text-transform: capitalize;
+}
+
+footer .sub-footer {
+  padding: 60px 0px;
+  border-top: 1px solid rgba(250,250,250,0.3);
+  text-align: center;
+}
+
+footer .contact-form {
+  position: relative;
+  z-index: 10;
+  padding: 45px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  
+}
+
+.contact-form input,
+.contact-form textarea {
+  color: #777;
+  font-size: 13px;
+  border: 1px solid #eee;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-bottom: 30px;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: none;
+  padding: 20px;
+}
+
+button.main-button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 25px;
+  padding: 15px 25px;
+  background-color: #f4813f;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+button.main-button:hover {
+  background-color: #f1556a;
+}
+
+
+.left-image-decor {
+  background-image: url(./images/left-bg-decor.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+  height: 50%;
+  margin-top: -100px;
+}
+
+#promotion {
+  padding: 100px 0px;
+}
+
+#promotion .left-image {
+  align-self: center;
+}
+
+#promotion .right-text ul {
+  padding: 0;
+  margin: 0;
+}
+
+#promotion .right-text ul li {
+  display: inline-block;
+  margin-bottom: 60px;
+}
+
+#promotion .right-text ul li:last-child {
+  margin-bottom: 0px;
+}
+
+#promotion .right-text img {
+  float: left;
+  margin-right: 30px;
+}
+
+#promotion .right-text h4 {
+  font-size: 22px;
+  color: #1e1e1e;
+  margin-bottom: 15px;
+  margin-top: 3px;
 }
