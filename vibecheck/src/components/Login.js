@@ -6,7 +6,7 @@ export default function Login(props) {
 
   const handleClose = () => {
     setShow(false);
-    props.shown;
+    props.handleClose();
   };
 
 

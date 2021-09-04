@@ -2,16 +2,17 @@ import React, {useState} from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import Login from "./Login";
 
+
 export default function header() {
   const [signup, setSignup] = useState(false);
 
-  shown = (e) => {
-    setSignup(!signup)
+  function shown() {
+    setSignup(false);
   }
 
   return (
     <header className="banner">
-      {signup ? <Login shown={signup}/> : ""}
+      {signup ? <Login shown={signup} handleClose={shown}/> : ""}
       <Container>
         <Row>
           <Col xs={12}>
