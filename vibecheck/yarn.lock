@@ -1739,6 +1739,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hookform/error-message@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@hookform/error-message@npm:2.0.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+    react-hook-form: ^7.0.0
+  checksum: 84aa3a6cb5cc729581850dcbe2bb5dfa43431c148782b4e8676757f808cd81e220fbc4e709c4eee381b0168a991c3a3f5306acae2a09a9760859c9a188d591ec
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.5.0":
   version: 0.5.0
   resolution: "@humanwhocodes/config-array@npm:0.5.0"
@@ -12259,6 +12270,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-hook-form@npm:^7.14.2":
+  version: 7.14.2
+  resolution: "react-hook-form@npm:7.14.2"
+  peerDependencies:
+    react: ^16.8.0 || ^17
+  checksum: 47954d656799d51bd552674c75a7b8472bb71c93f350a10c913408580bd2dc8f6405270d869fb4423bdcdc4f548a3158864a86cde1327249844954ca3467d7d0
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.3.2, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -14841,6 +14861,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "vibecheck@workspace:."
   dependencies:
+    "@hookform/error-message": ^2.0.0
     "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
     "@testing-library/user-event": ^12.1.10
@@ -14850,6 +14871,7 @@ resolve@^2.0.0-next.3:
     react: ^17.0.2
     react-bootstrap: 2.0.0-beta.4
     react-dom: ^17.0.2
+    react-hook-form: ^7.14.2
     react-scripts: 4.0.3
     web-vitals: ^1.0.1
   languageName: unknown
