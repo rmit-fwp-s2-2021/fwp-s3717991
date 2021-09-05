@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Container, Row, Col } from "react-bootstrap";
+import { UserLogin } from "./components/LoginUserContext";
 
 //Components
 import Footer from "./components/Footer";
@@ -14,11 +15,13 @@ import aboutIcon2 from "./images/about-icon-02.png";
 import aboutIcon3 from "./images/about-icon-03.png";
 
 function App() {
-
+  const user = "John";
 
   return (
     <div className="App">
-      <Header />
+      <UserLogin>
+        <Header user={user}/>
+      </UserLogin>
 
       <div className="welcome-area" id="welcome">
         <Container>

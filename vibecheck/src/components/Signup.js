@@ -7,7 +7,11 @@ import "../App.css";
 export default function Signup(props) {
   const [show, setShow] = useState(true);
   const { register, formState: { errors }, handleSubmit } = useForm({ criteriaMode: "all" });
-  const onSubmit = data => console.log(data);
+
+
+  const onSubmit = data => {
+    console.log(data);
+  };
 
   const handleClose = () => {
     setShow(false);
