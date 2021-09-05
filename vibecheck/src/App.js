@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       <Header />
 
-      <div className="welcome-area">
+      <div className="welcome-area" id="welcome">
         <Container>
           <Row>
             <Col xs={6}>
@@ -36,7 +36,7 @@ function App() {
       </div>
 
       <div className="left-image-decor"></div>
-      <section className="section" id="promotion">
+      <section className="section" id="about">
         <div className="container">
           <div className="row">
             <div className="left-image col-lg-5 col-md-12 col-sm-12 mobile-bottom-fix-big"
