@@ -389,6 +389,11 @@ button.login {
   margin-right: auto;
 }
 
+button.register {
+  all: unset;
+  color: #0000ff;
+  cursor: pointer;
+}
 
 .left-image-decor {
   background-image: url(./images/left-bg-decor.png);

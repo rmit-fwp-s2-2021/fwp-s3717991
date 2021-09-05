@@ -17,7 +17,7 @@ export default function Login(props) {
         <Modal.Title>Login</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="mini-font"><p>New to VibeCheck? <button onClick={() => {props.handleSwitch();}}>Register Here</button></p></div>
+        <div className="mini-font"><p>New to VibeCheck? <button className="register" onClick={() => {props.handleSwitch();}}>Register Here</button></p></div>
         <div className="contact-form-login">
           <form id="login" action="" method="post">
             <Row>

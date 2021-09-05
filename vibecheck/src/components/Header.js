@@ -16,6 +16,7 @@ export default function header() {
 
   function signupShowHide() {
     setSignup(!signup);
+    setLogin(!login);
   }
 
   return (

@@ -17,7 +17,7 @@ export default function Signup(props) {
         <Modal.Title>Sign Up</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="mini-font"><p>Already have an account?? <button onClick={() => {props.handleSwitch();}}>Login Here</button></p></div>
+        <div className="mini-font"><p>Already have an account? <button className="register" onClick={() => {props.handleSwitch();}}>Login Here</button></p></div>
         <div className="contact-form-login">
           <form id="signup" action="" method="post">
             <Row>
