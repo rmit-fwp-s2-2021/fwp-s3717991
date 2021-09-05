@@ -223,12 +223,27 @@ Banner
   background-position: right top;
 }
 
+.welcome-area-profile {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  min-height: 793px;
+}
+
 .welcome-area .text-area {
   width: 70%;
   margin-left: 15%;
   position: relative;
   align-self: center;
   margin-top: 40%;
+}
+
+.welcome-area-profile .text-area {
+  width: 70%;
+  margin-left: 15%;
+  position: relative;
+  align-self: center;
+  margin-top: 120px;
 }
 
 .welcome-area .text-area h1 {
