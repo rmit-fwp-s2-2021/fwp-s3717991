@@ -34,6 +34,9 @@ export default function header() {
               <li></li>
             </ul>
             <div className="sign-up">
+              {
+                //Check to see if the user is logged in
+              }
               <a onClick={() => setLogin(!login)} className="main-button-slider">Sign Up / Login</a>
             </div>
           </Col>
