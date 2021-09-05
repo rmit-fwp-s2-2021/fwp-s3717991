@@ -6,8 +6,8 @@ const LoginUser = React.createContext();
 
 export function UserLogin({ children }) {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("John");
+  const [email, setEmail] = useState("John@example.com");
 
   function login() {
     setLoggedIn(!loggedIn);

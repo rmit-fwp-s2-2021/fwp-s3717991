@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useLoginUser } from "./LoginUserContext";
+import { useLoginUser, useUser } from "./LoginUserContext";
 import "../App.css";
 
 export default function Login(props) {
@@ -15,6 +15,7 @@ export default function Login(props) {
     handleSubmit,
   } = useForm({ criteriaMode: "all" });
   const login = useLoginUser();
+  const user = useUser();
 
   const handleClose = () => {
     setShow(false);
@@ -30,8 +31,11 @@ export default function Login(props) {
   //not sure why login needs to be called in a function, but it does.
   const onSubmit = (data) => {
     loginUser();
+    user.name = data.loginName;
+    user.email = data.emailName;
+    //TODO: Save data to localstorage here
     console.log(isSubmitSuccessful, data);
-
+    window.location.href = "/profile";
   };
 
   return (
