@@ -14,7 +14,7 @@ export default function Posts(props) {
   try {
     name = JSON.parse(localStorage.getItem("name"));
     posts = JSON.parse(localStorage.getItem("posts"));
-    if (posts === null) {
+    if (posts === null || posts.length === 0) {
       console.log("NULL");
       posts = [{
         id: 0,
@@ -31,14 +31,13 @@ export default function Posts(props) {
 
   const handleClose = () => setShow(false);
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
     console.log(name, thoughts);
-    let time = new Date();
+    const time = new Date();
     //gets the latest ID
-    let id = posts[posts.length - 1].id;
+    const id = posts[posts.length - 1].id;
     posts.push({ id: id + 1, name: name, post: thoughts, time: time });
-    let json = JSON.stringify(posts);
+    const json = JSON.stringify(posts);
     localStorage.setItem("posts", json);
     console.log(posts);
   }
@@ -50,12 +49,13 @@ export default function Posts(props) {
   }
 
   function handleEdit() {
+    const time = new Date();
     const objIndex = posts.map(obj =>
       obj.id === index
-        ? { ...obj, post: oldThoughts }
+        ? { ...obj, post: oldThoughts, time: "Edited on: " + time }
         : obj
     );
-    let json = JSON.stringify(objIndex);
+    const json = JSON.stringify(objIndex);
     localStorage.setItem("posts", json);
     setEdit(false);
   }
@@ -66,11 +66,11 @@ export default function Posts(props) {
   }
 
   function handleDelete() {
-    let filtered = posts.filter(
+    const filtered = posts.filter(
       function (el) {
         return el.id != index;
       });
-    let json = JSON.stringify(filtered);
+    const json = JSON.stringify(filtered);
     localStorage.setItem("posts", json);
     setShow(false);
   }
@@ -126,7 +126,7 @@ export default function Posts(props) {
                       <div key={key}>
                         <Card>
                           <Card.Body>
-                            <Card.Title>{data.name}: {data.id}
+                            <Card.Title>{data.name}
                               <span><a href="#" onClick={() => editPost(data.id, data.post)}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => handleShow(data.id)}>DELETE</a></span></Card.Title>
                             <Card.Text>{data.post}</Card.Text>
                           </Card.Body>
