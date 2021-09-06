@@ -38,6 +38,7 @@ export default function header(props) {
               <li><a href="/" className="menu-item">Home</a></li>
               <li><a href="#about" className="menu-item">About</a></li>
               <li><a href="#contact-us" className="menu-item">Contact Us</a></li>
+              <li><a href="/posts" className="menu-item">Posts</a></li>
               <li></li>
             </ul>
             <div className="sign-up">
