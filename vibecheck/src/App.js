@@ -7,6 +7,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import Posts from "./pages/Posts";
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
@@ -24,6 +25,7 @@ function App() {
             path="/profile"
             exact
             render={props => (<Profile {...props} loggedInStatus={loggedInStatus} setLoggedInStatus={login} />)} />
+          <Route path="/posts" exact component={Posts} />
           <Route path="/" exact component={Home} />
         </Switch>
       </Router>
