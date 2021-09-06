@@ -1,42 +1,36 @@
 import React, { useState } from "react";
-import { Modal, Row } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
-import { useLoginUser, useUser } from "./LoginUserContext";
+import { Form, Modal, Button } from "react-bootstrap";
 import "../App.css";
 
 export default function Login(props) {
   const [show, setShow] = useState(true);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
 
-  //This is the form that is being used, and how it handles errors and validation.
-  const {
-    register,
-    formState: { errors, isSubmitSuccessful },
-    handleSubmit,
-  } = useForm({ criteriaMode: "all" });
-  const login = useLoginUser();
-  const user = useUser();
 
   const handleClose = () => {
     setShow(false);
     props.handleClose();
   };
 
-  //Logs the user in
-  function loginUser() {
-    console.log(isSubmitSuccessful);
-    login;
+  function validateForm() {
+    return name.length > 0 && password.length > 0;
   }
 
-  //not sure why login needs to be called in a function, but it does.
-  const onSubmit = (data) => {
-    loginUser();
-    user.name = data.loginName;
-    user.email = data.emailName;
-    //TODO: Save data to localstorage here
-    console.log(isSubmitSuccessful, data);
-    window.location.href = "/profile";
-  };
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log(name, password); 
+    console.log(localStorage.getItem("name"), localStorage.getItem("password")); 
+    //Check Login info
+    if(name == JSON.parse(localStorage.getItem("name")) && password == JSON.parse(localStorage.getItem("password"))){
+      props.login();
+      //window.location.href = "/profile";
+      handleClose();
+    } else {
+      console.log("Username and Password do not match!");
+    }
+    
+  }
 
   return (
     <Modal show={show} onHide={handleClose}>
@@ -46,67 +40,26 @@ export default function Login(props) {
       <Modal.Body>
         <div className="mini-font">
           <p>
-            New to VibeCheck?
-            <button
-              className="register"
-              onClick={() => {
-                props.handleSwitch();
-              }}
-            >
-              Register Here
-            </button>
-          </p>
+            New to VibeCheck? <button className="register" onClick={() => {props.handleSwitch();}}>Register Here</button></p>
         </div>
         <div className="contact-form-login">
-          <form id="login" onSubmit={handleSubmit(onSubmit)}>
-            <Row>
-              <fieldset>
-                <label>Name</label>
-                <input
-                  {...register("loginName", {
-                    required: "We need your login name!",
-                  })}
-                  type="text"
-                  id="loginName"
-                />
-                <ErrorMessage
-                  errors={errors}
-                  name="loginName"
-                  render={({ message }) => <p>{message}</p>}
-                />
-              </fieldset>
-            </Row>
-            <Row>
-              <fieldset>
-                <label>Password</label>
-                <input
-                  {...register("loginPassword", {
-                    required: "Password is required!",
-                  })}
-                  type="password"
-                  id="loginPasword"
-                />
-                <ErrorMessage
-                  errors={errors}
-                  name="loginPassword"
-                  render={({ message }) => <p>{message}</p>}
-                />
-              </fieldset>
-            </Row>
-            <Row>
-              <fieldset>
-                <button
-                  type="submit"
-                  id="login-form-submit"
-                  className="main-button login"
-                  onClick={login}
-                >
-
-                  Login
-                </button>
-              </fieldset>
-            </Row>
-          </form>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group size="lg" controlId="email">
+              <Form.Label>Name</Form.Label>
+              <Form.Control autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </Form.Group>
+            <Form.Group size="lg" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Button block size="lg" type="submit" disabled={!validateForm()}>
+              Login
+            </Button>
+          </Form>
         </div>
       </Modal.Body>
     </Modal>

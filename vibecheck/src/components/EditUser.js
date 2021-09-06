@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import "../App.css";
 
-export default function Signup(props) {
+export default function EditUser(props) {
   const [show, setShow] = useState(true);
-  const [name, setName] = useState("");
+  const [name, setName] = useState(JSON.parse(localStorage.getItem("name")));
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")));
 
   const handleClose = () => {
     setShow(false);
@@ -14,9 +14,8 @@ export default function Signup(props) {
   };
 
   function validateForm() {
-    //Do validation here
-    if (name.length > 0 && email.length > 0 && password.length > 0) {
-      //Validate Password here:
+    //Validate Password here:
+    if (password.length > 0) {
       const reg = new RegExp("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.^*()%!-]).*$");
       const okPassword = reg.test(password);
 
@@ -25,30 +24,33 @@ export default function Signup(props) {
       } else {
         console.log("password not strong enough");
       }
+    } else {
+      return true;
     }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const currentTime = new Date();
-
     //Register user here. saves to local storage for now
-    localStorage.setItem("name", JSON.stringify(name));
-    localStorage.setItem("email", JSON.stringify(email));
-    localStorage.setItem("password", JSON.stringify(password));
-    localStorage.setItem("time", JSON.stringify(currentTime));
-
-    window.location.href = "/profile";
-    handleClose;
+    if (name.length > 0) {
+      localStorage.setItem("name", JSON.stringify(name));
+    }
+    if (email.length > 0) {
+      localStorage.setItem("email", JSON.stringify(email));
+    }
+    if (password.length > 0) {
+      localStorage.setItem("password", JSON.stringify(password));
+    }
+    handleClose();
   }
 
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Sign Up</Modal.Title>
+        <Modal.Title>Edit User</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="mini-font"><p>Already have an account? <button className="register" onClick={() => { props.handleSwitch(); }}>Login Here</button></p></div>
+        <p>Empty/unchanged fields will not be changed.</p>
         <div className="contact-form-login">
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="name">
@@ -64,7 +66,7 @@ export default function Signup(props) {
               <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </Form.Group>
             <Button block size="lg" type="submit" disabled={!validateForm()}>
-              Register
+              Save Changes
             </Button>
           </Form>
         </div>

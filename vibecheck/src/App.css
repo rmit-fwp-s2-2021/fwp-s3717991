@@ -269,6 +269,13 @@ Banner
   position: relative;
 }
 
+/* profile */
+.card span {
+  float: right;
+}
+
+
+
 /*
 ----------
 Footer
