@@ -23,7 +23,7 @@ function newPost(name, post) {
   return { id: Date.now(), name: name, post: post, time: new Date().toString() }
 }
 
-export default function Posts(props) {
+export default function Posts() {
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
   const [thoughts, setThoughts] = useState("")
