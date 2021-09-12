@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import Login from "./Login";
-import Signup from "./Signup";
-import "../App.css";
+import React, { useState } from "react"
+import { Container, Col, Row } from "react-bootstrap"
+import Login from "./Login"
+import Signup from "./Signup"
+import "../App.css"
 
 
 export default function header(props) {
-  const [signup, setSignup] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [signup, setSignup] = useState(false)
+  const [login, setLogin] = useState(false)
 
 
 
   function shown() {
-    setLogin(false);
-    setSignup(false);
+    setLogin(false)
+    setSignup(false)
   }
 
   function signupShowHide() {
-    setSignup(!signup);
-    setLogin(!login);
+    setSignup(!signup)
+    setLogin(!login)
   }
 
   /*function buttonSelect() {
     //Check to see if the user is logged in
-    console.log("testing");
+    console.log("testing")
   }*/
 
   return (
@@ -53,5 +53,5 @@ export default function header(props) {
       </Container>
 
     </header>
-  );
+  )
 }

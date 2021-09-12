@@ -1,47 +1,47 @@
-import React, { useState } from "react";
-import { Modal, Form, Button } from "react-bootstrap";
-import "../App.css";
+import React, { useState } from "react"
+import { Modal, Form, Button } from "react-bootstrap"
+import "../App.css"
 
 export default function EditUser(props) {
-  const [show, setShow] = useState(true);
-  const [name, setName] = useState(JSON.parse(localStorage.getItem("name")));
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")));
+  const [show, setShow] = useState(true)
+  const [name, setName] = useState(JSON.parse(localStorage.getItem("name")))
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")))
 
   const handleClose = () => {
-    setShow(false);
-    props.handleClose();
-  };
+    setShow(false)
+    props.handleClose()
+  }
 
   function validateForm() {
     //Validate Password here:
     if (password.length > 0) {
-      const reg = new RegExp("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:;=?@#|'<>.^*()%!-]).*$");
-      const okPassword = reg.test(password);
+      const reg = new RegExp("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:=?@#|'<>.^*()%!-]).*$")
+      const okPassword = reg.test(password)
 
       if (okPassword) {
-        return true;
+        return true
       } else {
-        console.log("password not strong enough");
+        console.log("password not strong enough")
       }
     } else {
-      return true;
+      return true
     }
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     //Register user here. saves to local storage for now
     if (name.length > 0) {
-      localStorage.setItem("name", JSON.stringify(name));
+      localStorage.setItem("name", JSON.stringify(name))
     }
     if (email.length > 0) {
-      localStorage.setItem("email", JSON.stringify(email));
+      localStorage.setItem("email", JSON.stringify(email))
     }
     if (password.length > 0) {
-      localStorage.setItem("password", JSON.stringify(password));
+      localStorage.setItem("password", JSON.stringify(password))
     }
-    handleClose();
+    handleClose()
   }
 
   return (
@@ -72,5 +72,5 @@ export default function EditUser(props) {
         </div>
       </Modal.Body>
     </Modal>
-  );
+  )
 }

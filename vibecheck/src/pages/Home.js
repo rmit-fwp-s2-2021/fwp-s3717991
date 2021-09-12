@@ -1,12 +1,12 @@
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import Footer from "../components/Footer";
+import React from "react"
+import { Container, Row, Col } from "react-bootstrap"
+import Footer from "../components/Footer"
 
 //Images
-import leftImage from "../images/left-image.png";
-import aboutIcon1 from "../images/about-icon-01.png";
-import aboutIcon2 from "../images/about-icon-02.png";
-import aboutIcon3 from "../images/about-icon-03.png";
+import leftImage from "../images/left-image.png"
+import aboutIcon1 from "../images/about-icon-01.png"
+import aboutIcon2 from "../images/about-icon-02.png"
+import aboutIcon3 from "../images/about-icon-03.png"
 
 export default function Home() {
   return (
@@ -65,5 +65,5 @@ export default function Home() {
       <Footer />
     </div>
 
-  );
+  )
 }

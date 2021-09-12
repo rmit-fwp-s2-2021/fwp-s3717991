@@ -1,41 +1,41 @@
-import React, { useState } from "react";
-import { Container, Row, Card, Modal, Button } from "react-bootstrap";
-import EditUser from "../components/EditUser";
+import React, { useState } from "react"
+import { Container, Row, Card, Modal, Button } from "react-bootstrap"
+import EditUser from "../components/EditUser"
 
 export default function Profile(props) {
-  const [edit, setEdit] = useState(false);
-  const [show, setShow] = useState(false);
+  const [edit, setEdit] = useState(false)
+  const [show, setShow] = useState(false)
 
   function shown() {
-    setEdit(!edit);
+    setEdit(!edit)
   }
 
   //TODO: ask database if data is there, so a try-catch loop will not be needed. 
-  let name, email, time;
+  let name, email, time
   try {
-    name = JSON.parse(localStorage.getItem("name"));
-    email = JSON.parse(localStorage.getItem("email"));
-    time = JSON.parse(localStorage.getItem("time"));
+    name = JSON.parse(localStorage.getItem("name"))
+    email = JSON.parse(localStorage.getItem("email"))
+    time = JSON.parse(localStorage.getItem("time"))
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
-  props.setloggedInStatus;
+  props.setloggedInStatus
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   function deleteUser() {
     //TODO: Delete from database file when this exists
-    localStorage.setItem("name", "");
-    localStorage.setItem("email", "");
-    localStorage.setItem("time", "");
-    localStorage.setItem("password", "");
-    handleClose();
-    window.location.href = "/";
+    localStorage.setItem("name", "")
+    localStorage.setItem("email", "")
+    localStorage.setItem("time", "")
+    localStorage.setItem("password", "")
+    handleClose()
+    window.location.href = "/"
   }
 
   function editUser() {
-    setEdit(true);
+    setEdit(true)
   }
 
 
@@ -58,7 +58,7 @@ export default function Profile(props) {
             <div className="text-area">
               <Card>
                 <Card.Header>Profile
-                  <span><a href="#" onClick={editUser}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={handleShow}>DELETE</a></span>
+                  <span><a href="#" onClick={editUser}>EDIT</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" onClick={handleShow}>DELETE</a></span>
                 </Card.Header>
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
@@ -71,5 +71,5 @@ export default function Profile(props) {
         </Container>
       </div>
     </div>
-  );
+  )
 }

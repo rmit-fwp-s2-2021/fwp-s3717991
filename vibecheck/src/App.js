@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import React, { useState } from "react"
+import "bootstrap/dist/css/bootstrap.min.css"
+import "./App.css"
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
 
 //Components
-import Header from "./components/Header";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import Posts from "./pages/Posts";
+import Header from "./components/Header"
+import Home from "./pages/Home"
+import Profile from "./pages/Profile"
+import Posts from "./pages/Posts"
 
 function App() {
-  const [loggedInStatus, setLoggedInStatus] = useState(false);
+  const [loggedInStatus, setLoggedInStatus] = useState(false)
 
   function login() {
-    setLoggedInStatus(true);
+    setLoggedInStatus(true)
   }
 
   return (
@@ -31,7 +31,7 @@ function App() {
       </Router>
 
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

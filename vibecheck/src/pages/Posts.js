@@ -1,78 +1,80 @@
-import React, { useState } from "react";
-import { Container, Row, Card, Modal, Button, Form } from "react-bootstrap";
+import React, { useState, useReducer } from "react"
+import { Container, Row, Card, Modal, Button, Form } from "react-bootstrap"
+
+function reducer(post, action) {
+  switch (action.type) {
+    case "addpost":
+      return [...post, newPost(action.payload.name, action.payload.thoughts)]
+    case "editpost":
+      return post.map(post => {
+        if (post.id === action.payload.id) {
+          return { ...post, post: action.payload.thoughts, time: `Edited on: ${new Date().toString()}` }
+        }
+        return post
+      })
+    case "deletepost":
+      return post.filter(post => post.id !== action.payload.id)
+    default:
+      return post
+  }
+}
+
+function newPost(name, post) {
+  return { id: Date.now(), name: name, post: post, time: new Date().toString() }
+}
 
 export default function Posts(props) {
-  const [edit, setEdit] = useState(false);
-  const [show, setShow] = useState(false);
-  const [thoughts, setThoughts] = useState("");
-  const [oldThoughts, setOldThoughts] = useState("");
-  const [index, setIndex] = useState(0);
+  const [edit, setEdit] = useState(false)
+  const [show, setShow] = useState(false)
+  const [thoughts, setThoughts] = useState("")
+  const [oldThoughts, setOldThoughts] = useState("")
+  const [index, setIndex] = useState(0)
 
+  let posts = []
+  if(JSON.parse(localStorage.getItem("post"))) {
+    posts = [JSON.parse(localStorage.getItem("post"))]
+  }
+  const [post, update] = useReducer(reducer, posts)
+
+  console.log(post)
+  //TODO: Move this into an "onMount useEffect"
   //TODO: ask database if data is there, so a try-catch loop will not be needed. 
-  let name;
-  let posts;
+  let name
   try {
-    name = JSON.parse(localStorage.getItem("name"));
-    posts = JSON.parse(localStorage.getItem("posts"));
-    if (posts === null || posts.length === 0) {
-      console.log("NULL");
-      posts = [{
-        id: 0,
-        name: "No Posts",
-        post: "There are no posts. Make some more!",
-      }];
-    }
-    //posts.reverse();
-    console.log(posts);
-    props.setloggedInStatus;
+    name = JSON.parse(localStorage.getItem("name"))
   } catch (e) {
-    console.log(e);
-  }
-
-  const handleClose = () => setShow(false);
-
-  function handleSubmit() {
-    console.log(name, thoughts);
-    const time = new Date();
-    //gets the latest ID
-    const id = posts[posts.length - 1].id;
-    posts.push({ id: id + 1, name: name, post: thoughts, time: time });
-    const json = JSON.stringify(posts);
-    localStorage.setItem("posts", json);
-    console.log(posts);
-  }
-
-  function editPost(id, post) {
-    setOldThoughts(post);
-    setIndex(id);
-    setEdit(true);
-  }
-
-  function handleEdit() {
-    const time = new Date();
-    const objIndex = posts.map(obj =>
-      obj.id === index
-        ? { ...obj, post: oldThoughts, time: "Edited on: " + time }
-        : obj
-    );
-    const json = JSON.stringify(objIndex);
-    localStorage.setItem("posts", json);
-    setEdit(false);
+    console.log(e)
   }
 
   function handleShow(id) {
-    setIndex(id);
-    setShow(true);
+    setIndex(id)
+    setShow(true)
   }
 
-  function handleDelete() {
-    const filtered = posts.filter(
-      function (el) {
-        return el.id != index;
-      });
-    const json = JSON.stringify(filtered);
-    localStorage.setItem("posts", json);
-    setShow(false);
+  async function handleSubmit(e) {
+    e.preventDefault()
+    await update({ type: "addpost", payload: { name: name, thoughts: thoughts } })
+    await localStorage.setItem("post", JSON.stringify(post))
+    setThoughts("")
+  }
+
+  async function handleEdit(e) {
+    e.preventDefault()
+    await update({ type: "editpost", payload: { id: index, thoughts: oldThoughts } })
+    await localStorage.setItem("post", JSON.stringify(post))
+    setEdit(false)
+  }
+
+  function editPost(id, post) {
+    setOldThoughts(post)
+    setIndex(id)
+    setEdit(true)
+  }
+
+  async function handleDelete() {
+    await update({ type: "deletepost", payload: { id: index } })
+    await localStorage.setItem("post", JSON.stringify(post))
+    setShow(false)
   }
 
   return (
@@ -80,12 +82,12 @@ export default function Posts(props) {
       <div className="welcome-area-profile">
         <Container>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={() => setShow(false)}>
             <Modal.Header closeButton><Modal.Title>Delete Post</Modal.Title></Modal.Header>
             <Modal.Body><p>Are you sure you want to delete this post?</p></Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleDelete}>Yes, Delete</Button>
-              <Button variant="primary" onClick={handleClose}>No</Button>
+              <Button variant="primary" onClick={() => setShow(false)}>No</Button>
             </Modal.Footer>
           </Modal>
 
@@ -102,6 +104,8 @@ export default function Posts(props) {
               </Form>
             </Modal.Body>
           </Modal>
+
+
           <Row>
             <div className="text-area">
               <Card>
@@ -121,9 +125,9 @@ export default function Posts(props) {
 
               <div className="posts">
                 {
-                  posts.map((data, key) => {
+                  post.map(data => {
                     return (
-                      <div key={key}>
+                      <div key={data.id}>
                         <Card>
                           <Card.Body>
                             <Card.Title>{data.name}
@@ -133,7 +137,7 @@ export default function Posts(props) {
                           <Card.Footer className="text-muted">{data.time}</Card.Footer>
                         </Card>
                       </div>
-                    );
+                    )
                   })}
               </div>
             </div>
@@ -141,5 +145,5 @@ export default function Posts(props) {
         </Container>
       </div>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import React from "react";
-import { Container, Row, Col} from "react-bootstrap";
-import "../App.css";
+import React from "react"
+import { Container, Row, Col} from "react-bootstrap"
+import "../App.css"
 
 export default function footer() {
   return (
@@ -46,7 +46,7 @@ export default function footer() {
         <Row>
           <div className="col-lg-12">
             <div className="sub-footer">
-              <p>Copyright &copy; 2021 Vibe Check Social Media
+              <p>Copyright &copy 2021 Vibe Check Social Media
 
                 | Designed by Josh Thiele s3717991</p>
             </div>
@@ -54,5 +54,5 @@ export default function footer() {
         </Row>
       </Container>
     </footer>
-  );
+  )
 }

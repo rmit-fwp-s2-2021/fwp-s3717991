@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
-import "../App.css";
+import React, { useState } from "react"
+import { Form, Modal, Button } from "react-bootstrap"
+import "../App.css"
 
 export default function Login(props) {
-  const [show, setShow] = useState(true);
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
+  const [show, setShow] = useState(true)
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState("")
 
 
   const handleClose = () => {
-    setShow(false);
-    props.handleClose();
-  };
+    setShow(false)
+    props.handleClose()
+  }
 
   function validateForm() {
-    return name.length > 0 && password.length > 0;
+    return name.length > 0 && password.length > 0
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    console.log(name, password); 
-    console.log(localStorage.getItem("name"), localStorage.getItem("password")); 
+    event.preventDefault()
+    console.log(name, password) 
+    console.log(localStorage.getItem("name"), localStorage.getItem("password")) 
     //Check Login info
     if(name == JSON.parse(localStorage.getItem("name")) && password == JSON.parse(localStorage.getItem("password"))){
-      props.login();
-      //window.location.href = "/profile";
-      handleClose();
+      props.login()
+      //window.location.href = "/profile"
+      handleClose()
     } else {
-      console.log("Username and Password do not match!");
+      console.log("Username and Password do not match!")
     }
     
   }
@@ -40,7 +40,7 @@ export default function Login(props) {
       <Modal.Body>
         <div className="mini-font">
           <p>
-            New to VibeCheck? <button className="register" onClick={() => {props.handleSwitch();}}>Register Here</button></p>
+            New to VibeCheck? <button className="register" onClick={() => {props.handleSwitch()}}>Register Here</button></p>
         </div>
         <div className="contact-form-login">
           <Form onSubmit={handleSubmit}>
@@ -63,5 +63,5 @@ export default function Login(props) {
         </div>
       </Modal.Body>
     </Modal>
-  );
+  )
 }
