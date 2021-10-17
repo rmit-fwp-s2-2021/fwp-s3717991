@@ -16,8 +16,10 @@ app.get('/', (req, res) => {
   res.json({ message: "Hello World"})
 })
 
-//Users
+//Routes
 require('./routes/users.routes.js')(express, app)
+require('./routes/posts.routes.js')(express, app)
+require('./routes/comments.routes.js')(express, app)
 
 const hostname = '127.0.0.1'
 //Sets the port, must be different than 3000.
