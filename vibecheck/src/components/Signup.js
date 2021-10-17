@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Modal, Form, Button } from "react-bootstrap"
 import "../App.css"
+import axios from "axios"
 
 export default function Signup(props) {
   const [show, setShow] = useState(true)
@@ -28,18 +29,29 @@ export default function Signup(props) {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const currentTime = new Date()
 
-    //Register user here. saves to local storage for now
-    localStorage.setItem("name", JSON.stringify(name))
-    localStorage.setItem("email", JSON.stringify(email))
-    localStorage.setItem("password", JSON.stringify(password))
-    localStorage.setItem("time", JSON.stringify(currentTime))
-
-    window.location.href = "/profile"
-    handleClose
+    //posts the data to the database to create a new user.
+    //FIXME: Hash the password
+    //TODO: ensure that the email is unique.
+    //TODO: Alerts
+    try {
+      await axios({
+        method: "post",
+        url: "http://localhost:8080/api/users",
+        data: {
+          name: name,
+          password: password,
+          email: email
+        }
+      })
+      window.location.href = "/profile"
+      handleClose
+    } catch (e) {
+      console.log(e)
+      //TODO: Show error alert here
+    }
   }
 
   return (

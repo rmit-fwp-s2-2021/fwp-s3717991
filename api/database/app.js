@@ -7,12 +7,11 @@ const db = {
 
 //Seed data, this is just for creation purposes, and will not run if there are already users
 async function seedData() {
-  const count = db.user.count()
-
+  const count = await db.user.count()
   if (count > 0){
     return
   } else {
-    //await db.user.create({name: "Josh", password: "JoshPassword", email: "josh@josh.com"})
+    await db.user.create({name: "Josh", password: "JoshPassword", email: "josh@josh.com"})
   }
 }
 
@@ -21,6 +20,7 @@ db.sequelize = new Sequelize(sql.DB, sql.USER, sql.PASSWORD, {
   host: sql.HOST,
   dialect: sql.DIALECT
 })
+
 //Includes the database models
 db.user = require('./models/users.js')(db.sequelize, DataTypes)
 db.post = require('./models/posts.js')(db.sequelize, DataTypes)

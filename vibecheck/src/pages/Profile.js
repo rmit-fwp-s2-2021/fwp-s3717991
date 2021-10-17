@@ -58,7 +58,7 @@ export default function Profile(props) {
             <div className="text-area">
               <Card>
                 <Card.Header>Profile
-                  <span><a href="#" onClick={editUser}>EDIT</a>&nbsp&nbsp&nbsp&nbsp&nbsp<a href="#" onClick={handleShow}>DELETE</a></span>
+                  <span><a href="#" onClick={editUser}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={handleShow}>DELETE</a></span>
                 </Card.Header>
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>
