@@ -1,25 +1,40 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Container, Row, Card, Modal, Button } from "react-bootstrap"
 import EditUser from "../components/EditUser"
+import axios from "axios"
 
 export default function Profile(props) {
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
+  const [name, setName] = useState(localStorage.getItem("name"))
+  const [email, setEmail] = useState("")
+  const [time, setTime] = useState("")
+
+  //Load the users information on mount.
+  useEffect(() => {
+    loadUser()
+  })
+
+  
 
   function shown() {
     setEdit(!edit)
   }
 
-  //TODO: ask database if data is there, so a try-catch loop will not be needed. 
-  let name, email, time
-  try {
-    name = JSON.parse(localStorage.getItem("name"))
-    email = JSON.parse(localStorage.getItem("email"))
-    time = JSON.parse(localStorage.getItem("time"))
-  } catch (e) {
-    console.log(e)
+  async function loadUser() {
+    try {
+      const results = await axios.get(`http://localhost:8080/api/users/${name}`)
+      console.log(results)
+      if (results.data === null) {
+        console.log(null)
+      } else {
+        setEmail(results.data.email)
+        setTime(results.data.createdAt)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
-  props.setloggedInStatus
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
