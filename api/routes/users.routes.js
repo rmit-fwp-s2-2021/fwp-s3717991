@@ -11,6 +11,9 @@ module.exports = (express, app) => {
   //Create new user
   router.post('/', controller.create)
 
+  //login user
+  router.post('/login/', controller.login)
+
   //Update user
   router.put('/:id', controller.update)
 

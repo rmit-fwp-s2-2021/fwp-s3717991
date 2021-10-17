@@ -9,7 +9,7 @@ exports.all = async (req, res) => {
 
 //returns single user
 exports.single = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id)
+  const user = await db.user.findOne({ where: { name: req.params.id } })
   return res.json(user)
 }
 
@@ -22,6 +22,24 @@ exports.create = async (req, res) => {
   })
 
   return res.json(user)
+}
+
+//Logs in user
+exports.login = async (req, res) => {
+  try {
+    const user = await db.user.findOne({ where: { name: req.body.name } })
+
+    if (user === null) {
+      return res.json(user)
+
+    } else {
+        return res.json({
+          username: user.name,
+          password: user.password
+        })
+    }
+  } catch (error) {
+  }
 }
 
 //Update user information
@@ -39,12 +57,13 @@ exports.update = async (req, res) => {
 
 //Delete user
 exports.delete = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id)
-
+  
+  const user = await db.user.findOne({ where: { name: req.params.id } })
+  console.log(user)
   let deleted = false
 
   //Checks to see if the user exists, if so delete.
-  if(user !== null){
+  if (user !== null) {
     await user.destroy()
     deleted = true
   }

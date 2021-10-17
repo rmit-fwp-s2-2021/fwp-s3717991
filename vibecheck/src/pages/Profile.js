@@ -39,14 +39,15 @@ export default function Profile(props) {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
-  function deleteUser() {
-    //TODO: Delete from database file when this exists
-    localStorage.setItem("name", "")
-    localStorage.setItem("email", "")
-    localStorage.setItem("time", "")
-    localStorage.setItem("password", "")
-    handleClose()
-    window.location.href = "/"
+  async function deleteUser() {
+    console.log("deleteing: " + name)
+    const results = await axios.delete(`http://localhost:8080/api/users/${name}`)
+    console.log(results.data)
+    if (results.data) {
+      handleClose()
+      window.location.href = "/"
+    }
+    
   }
 
   function editUser() {

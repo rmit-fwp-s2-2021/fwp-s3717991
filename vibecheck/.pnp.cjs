@@ -40,6 +40,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:11.2.7"],
             ["@testing-library/user-event", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:12.8.3"],
             ["axios", "npm:0.23.0"],
+            ["bcryptjs", "npm:2.4.3"],
             ["body-parser", "npm:1.19.0"],
             ["bootstrap", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:5.1.0"],
             ["concurrently", "npm:6.3.0"],
@@ -7070,6 +7071,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/batch-npm-0.6.1-70e2e81169-61f9934c73.zip/node_modules/batch/",
           "packageDependencies": [
             ["batch", "npm:0.6.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["bcryptjs", [
+        ["npm:2.4.3", {
+          "packageLocation": "./.yarn/cache/bcryptjs-npm-2.4.3-32de4957eb-0e80ed852a.zip/node_modules/bcryptjs/",
+          "packageDependencies": [
+            ["bcryptjs", "npm:2.4.3"]
           ],
           "linkType": "HARD",
         }]
@@ -20687,6 +20697,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/react", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:11.2.7"],
             ["@testing-library/user-event", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:12.8.3"],
             ["axios", "npm:0.23.0"],
+            ["bcryptjs", "npm:2.4.3"],
             ["body-parser", "npm:1.19.0"],
             ["bootstrap", "virtual:d3d5d64f9e271c594be69dedabb5388054d65ed8182f84d06c08ebe646bd24faa281a754f337577fb8915ac56a10f3d9d004dd6e88990331c264aacbbb5cfc22#npm:5.1.0"],
             ["concurrently", "npm:6.3.0"],

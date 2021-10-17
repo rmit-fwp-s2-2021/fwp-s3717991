@@ -9,6 +9,16 @@ export default function header(props) {
   const [signup, setSignup] = useState(false)
   const [login, setLogin] = useState(false)
 
+  const name = localStorage.getItem("name")
+
+  let loggedIn = false
+  try {
+    loggedIn = localStorage.getItem("loggedIn")
+  } catch (error) {
+    console.log(error)
+  }
+  
+
 
 
   function shown() {
@@ -43,7 +53,7 @@ export default function header(props) {
             </ul>
             <div className="sign-up">
               <p>
-                {props.loggedInStatus ? <a href="/profile" className="main-button-slider">Profile Page</a> : <a onClick={() => setLogin(!login)} className="main-button-slider">Sign Up / Login</a>}
+                {loggedIn ? <a href="/profile" className="main-button-slider">Profile Page</a> : <a onClick={() => setLogin(!login)} className="main-button-slider">Sign Up / Login</a>}
               </p>
 
             </div>
