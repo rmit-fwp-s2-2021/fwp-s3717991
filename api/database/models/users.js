@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) =>
     user_id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     password: {
       type: DataTypes.STRING,

@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from "react"
+import React, { useState, useReducer, useEffect, useCallback } from "react"
 import { Container, Row, Card, Modal, Button, Form } from "react-bootstrap"
 import axios from "axios"
 
@@ -27,6 +27,7 @@ function newPost(name, post) {
 export default function Posts() {
   //Saves space by always using credentials
   axios.defaults.withCredentials = true
+  let postList = []
 
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
@@ -34,12 +35,11 @@ export default function Posts() {
   const [oldThoughts, setOldThoughts] = useState("")
   const [index, setIndex] = useState(0)
   const [name, setName] = useState("")
+  const [post, update] = useReducer(reducer, postList)
+  const [isLoading, setLoading] = useState(true)
+  const [data, setData] = useState(null)
 
-  let posts = []
-  if(JSON.parse(localStorage.getItem("post"))) {
-    posts = [JSON.parse(localStorage.getItem("post"))]
-  }
-  const [post, update] = useReducer(reducer, posts)
+
 
   useEffect(async () => {
     try {
@@ -53,7 +53,57 @@ export default function Posts() {
     } catch (error) {
       console.log(error)
     }
+
+    renderPosts()
   }, [])
+
+  async function getPostData() {
+
+  }
+
+  const getdPostData = useCallback(async () => {
+    let results = await axios.get("http://localhost:8080/api/posts")
+    console.log("results: " + results.data)
+    if (results.data === data) {
+      console.log(" not changing")
+
+    } else {
+      console.log("whoop")
+      setData(results.data)
+    }
+
+    console.log("Data: " + data)
+  })
+
+  /*useEffect(() => {
+    getPostData()
+  })*/
+
+  async function renderPosts() {
+    try {
+      let results = await axios.get("http://localhost:8080/api/posts")
+      console.log(results.data)
+      postList = results.data
+      console.log(postList)
+      return (
+        postList.map(data => {
+          return (
+            <div key={data.post_id}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{data.user_id}
+                    <span><a href="#" onClick={() => editPost(data.id, data.post)}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => handleShow(data.id)}>DELETE</a></span></Card.Title>
+                  <Card.Text>{data.content}</Card.Text>
+                </Card.Body>
+                <Card.Footer className="text-muted">{data.updatedAt}</Card.Footer>
+              </Card>
+            </div>
+          )
+        }))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   function handleShow(id) {
     setIndex(id)
@@ -62,6 +112,16 @@ export default function Posts() {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    console.log(thoughts)
+    const results = await axios({
+      method: "post",
+      url: "http://localhost:8080/api/posts",
+      data: {
+        content: thoughts,
+        user: name
+      }
+
+    })
     await update({ type: "addpost", payload: { name: name, thoughts: thoughts } })
     await localStorage.setItem("post", JSON.stringify(post))
     setThoughts("")
@@ -133,21 +193,7 @@ export default function Posts() {
 
 
               <div className="posts">
-                {
-                  post.map(data => {
-                    return (
-                      <div key={data.id}>
-                        <Card>
-                          <Card.Body>
-                            <Card.Title>{data.name}
-                              <span><a href="#" onClick={() => editPost(data.id, data.post)}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={() => handleShow(data.id)}>DELETE</a></span></Card.Title>
-                            <Card.Text>{data.post}</Card.Text>
-                          </Card.Body>
-                          <Card.Footer className="text-muted">{data.time}</Card.Footer>
-                        </Card>
-                      </div>
-                    )
-                  })}
+                {renderPosts}
               </div>
             </div>
           </Row>

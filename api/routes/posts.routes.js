@@ -2,19 +2,19 @@ module.exports = (express, app) => {
   const controller = require('../controllers/posts.controller.js')
   const router = express.Router()
 
-  //Select all users
+  //Get all posts
   router.get('/', controller.all)
 
-  //Get single user
+  //Get single post
   router.get('/:id', controller.single)
 
-  //Create new user
+  //Create new post
   router.post('/', controller.create)
 
-  //Update user
+  //Update post
   router.put('/:id', controller.update)
 
-  //Delete user
+  //Delete post
   router.delete('/:id', controller.delete)
 
   app.use('/api/posts', router)

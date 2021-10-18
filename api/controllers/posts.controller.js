@@ -3,8 +3,8 @@ const db = require("../database/app.js")
 
 //Returns all users
 exports.all = async (req, res) => {
-  const users = await db.user.findAll()
-  res.json(users)
+  const posts = await db.post.findAll()
+  res.json(posts)
 }
 
 //returns single user
@@ -15,13 +15,13 @@ exports.single = async (req, res) => {
 
 //creates new user
 exports.create = async (req, res) => {
-  const user = await db.user.create({
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email
+  const user = await db.user.findOne({ where: { name: req.body.user } })
+  const post = await db.post.create({
+    content: req.body.content,
+    user_id: user.user_id
   })
 
-  return res.json(user)
+  return res.json(post)
 }
 
 //Update user information
@@ -44,7 +44,7 @@ exports.delete = async (req, res) => {
   let deleted = false
 
   //Checks to see if the user exists, if so delete.
-  if(user !== null){
+  if (user !== null) {
     await user.destroy()
     deleted = true
   }
