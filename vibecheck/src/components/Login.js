@@ -10,7 +10,6 @@ export default function Login(props) {
   const [password, setPassword] = useState("")
   const [validated, setValidated] = useState(false)
 
-
   const handleClose = () => {
     setShow(false)
     props.handleClose()
@@ -42,8 +41,8 @@ export default function Login(props) {
           const res = await bcrypt.compare(password, results.data.password)
           console.log(res)
           if (res) {
+            window.location.href = "/profile"
             handleClose()
-            window.location.href("/posts")
           }
         }
 

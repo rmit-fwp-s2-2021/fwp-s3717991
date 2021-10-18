@@ -55,8 +55,13 @@ export default function Profile() {
     setEdit(true)
   }
 
-  function logout() {
-    setEdit(true)
+  async function logout() {
+    await axios({
+      method: "get",
+      url: "http://localhost:8080/api/users/login/logout",
+      withCredentials: true,
+    })
+    window.location.href = "/"
   }
 
 

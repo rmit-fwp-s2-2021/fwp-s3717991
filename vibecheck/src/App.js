@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom"
+import { Route, BrowserRouter as Router, Switch, Redirect } from "react-router-dom"
 import axios from "axios"
 
 //Components

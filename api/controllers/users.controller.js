@@ -50,13 +50,18 @@ exports.login = async (req, res) => {
 
 //If user is logged in, send the data
 exports.valid = async (req, res) => {
-  console.log("tesing")
   if (req.session.user) {
-    console.log("sending")
     res.send({loggedIn: true, user: req.session.user})
   } else {
-    console.log("nope")
     res.json({loggedIn: false})
+  }
+}
+
+//Log user out
+exports.logout = async (req, res) => {
+  if (req.session.user) {
+    req.session.destroy()
+    res.send({loggedIn: false})
   }
 }
 
