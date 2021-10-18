@@ -14,6 +14,9 @@ module.exports = (express, app) => {
   //login user
   router.post('/login/', controller.login)
 
+  //check for valid session
+  router.get('/login/valid/', controller.valid)
+
   //Update user
   router.put('/:id', controller.update)
 

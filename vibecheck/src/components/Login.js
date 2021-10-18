@@ -31,7 +31,8 @@ export default function Login(props) {
           url: "http://localhost:8080/api/users/login",
           data: {
             name: name
-          }
+          },
+          withCredentials: true,
         })
         console.log(results.data)
         //If data is null, username or password is wrong. Only name is send if correct for security
