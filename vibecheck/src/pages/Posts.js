@@ -1,5 +1,6 @@
-import React, { useState, useReducer } from "react"
+import React, { useState, useReducer, useEffect } from "react"
 import { Container, Row, Card, Modal, Button, Form } from "react-bootstrap"
+import axios from "axios"
 
 function reducer(post, action) {
   switch (action.type) {
@@ -24,11 +25,15 @@ function newPost(name, post) {
 }
 
 export default function Posts() {
+  //Saves space by always using credentials
+  axios.defaults.withCredentials = true;
+
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
   const [thoughts, setThoughts] = useState("")
   const [oldThoughts, setOldThoughts] = useState("")
   const [index, setIndex] = useState(0)
+  const [name, setName] = useState("")
 
   let posts = []
   if(JSON.parse(localStorage.getItem("post"))) {
@@ -36,15 +41,19 @@ export default function Posts() {
   }
   const [post, update] = useReducer(reducer, posts)
 
-  console.log(post)
-  //TODO: Move this into an "onMount useEffect"
-  //TODO: ask database if data is there, so a try-catch loop will not be needed. 
-  let name
-  try {
-    name = JSON.parse(localStorage.getItem("name"))
-  } catch (e) {
-    console.log(e)
-  }
+  useEffect(async () => {
+    try {
+      const results = await axios.get(`http://localhost:8080/api/users/login/valid`)
+      console.log(results)
+      if (results.data === null) {
+        console.log(null)
+      } else {
+        setName(results.data.name)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
   function handleShow(id) {
     setIndex(id)

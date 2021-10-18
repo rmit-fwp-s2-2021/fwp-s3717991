@@ -29,14 +29,21 @@ function App() {
       <Header loggedInStatus={loggedInStatus} />
       <p>Hi {loggedInStatus.toString()} </p>
       <Router>
-        <Switch>
-          <Route
-            path="/profile"
-            exact
-            render={props => (<Profile {...props} loggedInStatus={loggedInStatus} />)} />
-          <Route path="/posts" exact component={Posts} />
-          <Route path="/" exact component={Home} />
-        </Switch>
+        { //Only allow the user to go to the posts and profile section if they are logged in, else just don't redirect
+        loggedInStatus ?
+          <Switch>
+            <Route
+              path="/profile"
+              exact
+              render={props => (<Profile {...props} loggedInStatus={loggedInStatus} />)} />
+            <Route path="/posts" exact component={Posts} />
+            <Route path="/" exact component={Home} />
+          </Switch>
+          :
+          <Switch>
+            <Route path="/" component={Home} />
+          </Switch>
+        }
       </Router>
 
     </div>
