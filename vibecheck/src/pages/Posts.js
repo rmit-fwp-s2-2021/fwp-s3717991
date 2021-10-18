@@ -26,7 +26,7 @@ function newPost(name, post) {
 
 export default function Posts() {
   //Saves space by always using credentials
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true
 
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
@@ -43,12 +43,12 @@ export default function Posts() {
 
   useEffect(async () => {
     try {
-      const results = await axios.get(`http://localhost:8080/api/users/login/valid`)
+      const results = await axios.get("http://localhost:8080/api/users/login/valid")
       console.log(results)
       if (results.data === null) {
         console.log(null)
       } else {
-        setName(results.data.name)
+        setName(results.data.user.name)
       }
     } catch (error) {
       console.log(error)

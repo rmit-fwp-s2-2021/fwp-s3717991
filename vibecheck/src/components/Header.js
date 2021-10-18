@@ -8,8 +8,6 @@ import "../App.css"
 export default function header(props) {
   const [signup, setSignup] = useState(false)
   const [login, setLogin] = useState(false)
-
-  const name = localStorage.getItem("name")
   
   function shown() {
     setLogin(false)

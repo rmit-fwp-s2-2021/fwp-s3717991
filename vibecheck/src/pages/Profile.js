@@ -3,7 +3,7 @@ import { Container, Row, Card, Modal, Button } from "react-bootstrap"
 import EditUser from "../components/EditUser"
 import axios from "axios"
 
-export default function Profile(props) {
+export default function Profile() {
   const [edit, setEdit] = useState(false)
   const [show, setShow] = useState(false)
   const [name, setName] = useState(localStorage.getItem("name"))
@@ -28,6 +28,7 @@ export default function Profile(props) {
       if (results.data === null) {
         console.log(null)
       } else {
+        setName(results.data.name)
         setEmail(results.data.email)
         setTime(results.data.createdAt)
       }
@@ -54,6 +55,10 @@ export default function Profile(props) {
     setEdit(true)
   }
 
+  function logout() {
+    setEdit(true)
+  }
+
 
   return (
     <div>
@@ -74,7 +79,7 @@ export default function Profile(props) {
             <div className="text-area">
               <Card>
                 <Card.Header>Profile
-                  <span><a href="#" onClick={editUser}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={handleShow}>DELETE</a></span>
+                  <span><a href="#" onClick={logout}>LOGOUT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={editUser}>EDIT</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onClick={handleShow}>DELETE</a></span>
                 </Card.Header>
                 <Card.Body>
                   <Card.Title>{name}</Card.Title>

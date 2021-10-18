@@ -42,10 +42,8 @@ export default function Login(props) {
           const res = await bcrypt.compare(password, results.data.password)
           console.log(res)
           if (res) {
-            console.log("working?")
-            localStorage.setItem("name", results.data.username)
-            localStorage.setItem("loggedIn", true)
             handleClose()
+            window.location.href("/posts")
           }
         }
 
