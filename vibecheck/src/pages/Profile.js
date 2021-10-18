@@ -15,6 +15,17 @@ export default function Profile() {
     loadUser()
   })
 
+  useEffect(async () => {
+    const res = await axios({
+      method: "get",
+      url: "http://localhost:8080/api/users/login/valid",
+      withCredentials: true,
+    })
+    if (res.data.loggedIn === true){
+      setName(res.data.user.name)
+    }
+  }, [])
+
   
 
   function shown() {
@@ -24,7 +35,6 @@ export default function Profile() {
   async function loadUser() {
     try {
       const results = await axios.get(`http://localhost:8080/api/users/${name}`)
-      console.log(results)
       if (results.data === null) {
         console.log(null)
       } else {

@@ -8,5 +8,5 @@
     "**/Thumbs.db": true,
     "**/node_modules": true
   },
-  "todo-tree.tree.scanMode": "workspace only"
+  "todo-tree.tree.scanMode": "workspace"
 }

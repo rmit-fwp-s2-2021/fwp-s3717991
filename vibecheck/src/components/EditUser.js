@@ -1,47 +1,67 @@
-import React, { useState } from "react"
-import { Modal, Form, Button } from "react-bootstrap"
+import React, { useState, useEffect } from "react"
+import { Modal, Form, Button, FloatingLabel, InputGroup } from "react-bootstrap"
 import "../App.css"
+import bcrypt from "bcryptjs"
+import axios from "axios"
 
 export default function EditUser(props) {
   const [show, setShow] = useState(true)
-  const [name, setName] = useState(JSON.parse(localStorage.getItem("name")))
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState(JSON.parse(localStorage.getItem("email")))
+  const [name, setName] = useState("")
+  const [password, setPassword] = useState()
+  const [email, setEmail] = useState("")
+  const [validated, setValidated] = useState(false)
+  const [oldName, setOldName] = useState("")
 
   const handleClose = () => {
     setShow(false)
     props.handleClose()
   }
 
-  function validateForm() {
-    //Validate Password here:
-    if (password.length > 0) {
-      const reg = new RegExp("^(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[$&+,:=?@#|'<>.^*()%!-]).*$")
-      const okPassword = reg.test(password)
+  useEffect(async () => {
+    const res = await axios({
+      method: "get",
+      url: "http://localhost:8080/api/users/login/valid",
+      withCredentials: true,
+    })
+    if (res.data.loggedIn === true) {
+      setName(res.data.user.name)
+      setOldName(res.data.user.name)
+      setEmail(res.data.user.email)
+    }
+  }, [])
 
-      if (okPassword) {
-        return true
-      } else {
-        console.log("password not strong enough")
-      }
+  async function handleSubmit(e) {
+    //Checks form validation first.
+    const form = e.currentTarget
+    if (form.checkValidity() === false) {
+      e.preventDefault()
+      e.stopPropagation()
     } else {
-      return true
-    }
-  }
+      e.preventDefault()
+      //Posts the data to the database to create a new user.
+      console.log("password: " + oldName)
+      try {
+        //Hash password locally first
+        bcrypt.hash(password, 10, async function (err, hash) {
+          await axios({
+            method: "put",
+            url: `http://localhost:8080/api/users/${name}`,
+            data: {
+              oldName: oldName,
+              name: name,
+              password: hash,
+              email: email
+            }
+          })
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    //Register user here. saves to local storage for now
-    if (name.length > 0) {
-      localStorage.setItem("name", JSON.stringify(name))
+        })
+
+        //TODO: Just show alert that user can now login
+        //handleClose
+      } catch (e) {
+        console.log(e)
+      }
     }
-    if (email.length > 0) {
-      localStorage.setItem("email", JSON.stringify(email))
-    }
-    if (password.length > 0) {
-      localStorage.setItem("password", JSON.stringify(password))
-    }
-    handleClose()
   }
 
   return (
@@ -54,18 +74,40 @@ export default function EditUser(props) {
         <div className="contact-form-login">
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              <FloatingLabel
+                controlId="flopatingInput"
+                label="Username"
+                className="md-3"
+              >
+                <Form.Control autoFocus type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              </FloatingLabel>
             </Form.Group>
             <Form.Group size="lg" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <FloatingLabel
+                controlId="flopatingInput"
+                label="Email"
+                className="md-3"
+              >
+                <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              </FloatingLabel>
             </Form.Group>
             <Form.Group size="lg" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <InputGroup>
+                <FloatingLabel
+                  controlId="flopatingInput"
+                  label="Password"
+                  className="md-3 password"
+
+                >
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </FloatingLabel>
+              </InputGroup>
             </Form.Group>
-            <Button block size="lg" type="submit" disabled={!validateForm()}>
+            <Button block size="lg" type="submit">
               Save Changes
             </Button>
           </Form>

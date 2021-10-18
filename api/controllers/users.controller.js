@@ -67,11 +67,17 @@ exports.logout = async (req, res) => {
 
 //Update user information
 exports.update = async (req, res) => {
-  const user = await db.user.findByPk(req.params.id)
-
+  console.log(`old: ${req.body.oldName}, new: ${req.body.name}, password: ${req.body.password}`)
+  const user = await db.user.findOne({ where: { name: req.body.oldName } })
+  console.log(user)
   user.name = req.body.name
-  user.password = req.body.password
   user.email = req.body.email
+
+  if(req.body.password !== undefined){
+    user.password = req.body.password
+  } else {
+    user.password = user.password
+  }
 
   await user.save();
 
